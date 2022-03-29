@@ -152,7 +152,7 @@ Status transform(char *exp,char newexp[])
 //进行最终计算，进行后缀表达式的运算并返回结果 
 double endcounter(char *newexp)
 {
-	double n1,n2,temp,i=0;
+	double n1,n2,temp=0;
 	//定义一个顺序栈（数栈） 
 	struct{
 		float data[MAXSIZE];
@@ -194,11 +194,12 @@ double endcounter(char *newexp)
 			}
 			default:{//当遇到数字或者分隔数字的'#'时，将数字存入数栈 
 				while(*newexp>='0'&&*newexp<='9'){
-					temp = i*10 + (*newexp - '0');
+					temp = temp*10 + (*newexp - '0');
 					newexp++; 
 				} //离开while时*newexp='#' 
 				s.top++;
 				s.data[s.top] = temp;
+				temp=0;
 				break;
 			}
 		}
